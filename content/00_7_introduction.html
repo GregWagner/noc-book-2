@@ -157,7 +157,8 @@
       <code>setup()</code>. There, we’ll initialize the <code>Walker</code>
       object's starting position (in this case, the center of the window). Also
       note the use of the keyword <code>this</code> to attach the properties to
-      the newly created object itself.</code></p>
+      the newly created object itself.</code>
+    </p>
 
     <pre data-code-language="java" data-type="programlisting" class="codesplit">
   class Walker {
@@ -182,7 +183,8 @@
         <li>Code that appears broken up by paragraphs of text (like) often
           appears as unfinished snippets. For example, the closing bracket —
           <code>}</code> — for the Walker class does not appear until later
-          below.</li>
+          below.
+        </li>
       </ul>
     </div>
 
@@ -200,7 +202,7 @@
 
     <pre data-code-language="java" data-type="programlisting" class="codesplit">
     // Objects have functions.
-    show() {
+    render() {
       stroke(0);
       point(this.x, this.y);
     }</pre>
@@ -215,7 +217,8 @@
       (<code>y--</code>). How does one pick from these four choices? Earlier I
       stated that you could flip two coins. In p5.js, however, when you want to
       randomly choose from a list of options, you can pick a random number using
-      <code>random()</code>.</p>
+      <code>random()</code>.
+    </p>
 
     <a data-primary="random number generators" data-secondary="random() function"
       data-type="indexterm"></a> <a data-primary="random() function" data-type="indexterm"></a>
@@ -236,14 +239,14 @@
 
     <pre data-code-language="java" data-type="programlisting" class="codesplit">
       //{!9} The random "choice" determines our step.
-      if (choice == 0) {
-        x++;
-      } else if (choice == 1) {
-        x--;
-      } else if (choice == 2) {
-        y++;
+      if (choice === 0) {
+        this.x++;
+      } else if (choice === 1) {
+        this.x--;
+      } else if (choice === 2) {
+        this.y++;
       } else {
-        y--;
+        this.y--;
       }
     }
   }</pre>
@@ -251,7 +254,8 @@
     <p>Now that I’ve written the class, it’s time to make an actual
       <code>Walker</code> object in the main sketch—<code>setup()</code> and
       <code>draw()</code>. Assuming you are looking to model a single random
-      walk, a single global variable.</p>
+      walk, a single global variable.
+    </p>
 
     <pre data-code-language="java" data-type="programlisting" class="codesplit">
   // A Walker object
@@ -281,13 +285,14 @@
   }</pre>
 
     <p>Finally, during each cycle through <code>draw()</code>, the
-      <code>Walker</code> takes a step and draws a dot.</p>
+      <code>Walker</code> takes a step and draws a dot.
+    </p>
 
     <pre data-code-language="java" data-type="programlisting" class="codesplit">
   function draw() {
     //{!2 .bold} Call functions on the Walker.
     walker.step();
-    walker.display();
+    walker.render();
   }</pre>
 
     <p>Since the background is drawn once in <code>setup()</code>, rather than
@@ -342,7 +347,8 @@
       probability that the <code>Walker</code> will take a step in any
       direction. In other words, if there are four possible steps, there is a 1
       in 4 (or 25%) chance the <code>Walker</code> will take any given step.
-      With nine possible steps, it’s a 1 in 9 (or ~11.1%) chance.</p>
+      With nine possible steps, it’s a 1 in 9 (or ~11.1%) chance.
+    </p>
 
     <a data-primary="random number generators" data-secondary="uniform number distributions and"
       data-type="indexterm"></a> <a data-primary="uniform number distributions"
@@ -572,7 +578,8 @@
 
     <p>The above methodology can be used to create a random walker that tends to
       move in a particular direction. Here is an example of a
-      <code>Walker</code> with the following probabilities:</p>
+      <code>Walker</code> with the following probabilities:
+    </p>
 
     <ul>
       <li>
@@ -779,7 +786,8 @@
     <p>Luckily for you, to use a normal distribution of random numbers in a
       p5.js sketch, you don’t have to do any of these calculations. Instead, the
       <code>randomGaussian()</code> function returns random numbers with a
-      normal distribution.</p>
+      normal distribution.
+    </p>
 
     <a data-primary="randomGaussian() function" data-type="indexterm"></a>
 
@@ -892,7 +900,8 @@
       probability distributions by filling an array with values (some duplicated
       so that they would be picked more frequently) or by testing the result of
       <code>random()</code>. A Lévy flight could be implemented with a 1% chance
-      of the walker taking a large step.</p>
+      of the walker taking a large step.
+    </p>
 
     <a data-primary="arrays" data-secondary="Lévy flights" data-tertiary="implementing with"
       data-type="indexterm"></a>
@@ -1110,7 +1119,8 @@
 
     <p>Now, instead of a random x-position, I want a Perlin noise x-position
       that is “smoother.” You might think that all you need to do is replace
-      <code>random()</code> with <code>noise()</code>, i.e.</p>
+      <code>random()</code> with <code>noise()</code>, i.e.
+    </p>
 
     <pre data-code-language="java" data-type="programlisting" class="codesplit">
   //{.line-through} A noise x-position?
@@ -1127,7 +1137,8 @@
       output range is fixed—it always returns a value between 0 and 1. You’ll
       see in a moment that you can get around this easily with p5’s
       <code>map()</code> function, but first let‘s examine what exactly
-      <code>noise()</code> expects us to pass in as an argument.</p>
+      <code>noise()</code> expects us to pass in as an argument.
+    </p>
 
     <p>One-dimensional Perlin noise can be thought of as a linear sequence of
       values over time. For example:</p>
@@ -1206,7 +1217,8 @@
     <p>The above code results in the same value printed over and over. This
       happens because I am asking for the result of the <code>noise()</code>
       function at the same point in time—3—over and over. If the time variable
-      <code>t</code> increments, however, I’ll get a different result.</p>
+      <code>t</code> increments, however, I’ll get a different result.
+    </p>
 
     <pre data-code-language="java" data-type="programlisting" class="codesplit">
   //{!1} Typically we would start with an offset of time = 0, though this is arbitrary.
@@ -1242,7 +1254,8 @@
         p5’s <code>map()</code> function. The <code>map()</code> function takes
         five arguments. First is the value you want to map, in this case
         <code>n</code>. This is followed by the value’s current range (minimum
-        and maximum), followed by the desired range.</p>
+        and maximum), followed by the desired range.
+      </p>
 
       <figure id="intro_figure8"><img alt="Figure I.8" src="intro/intro_08.png" />
         <figcaption>Figure I.8</figcaption>
@@ -1308,7 +1321,8 @@
         the <code>Walker</code> object would only move along a diagonal.
         Instead, I use two different parts of the noise space, starting at 0 for
         <code>x</code> and 10,000 for <code>y</code> so that <code>x</code> and
-        <code>y</code> appear to act independently of each other.</p>
+        <code>y</code> appear to act independently of each other.
+      </p>
 
       <figure id="intro_figure9"><img alt="Figure I.9" src="intro/intro_09.png" />
         <figcaption>Figure I.9</figcaption>
@@ -1403,7 +1417,8 @@
 
       <p>To color each pixel according to the <code>noise()</code> function,
         we’ll do exactly the same thing, only instead of calling
-        <code>random()</code> we’ll call <code>noise()</code>.</p>
+        <code>random()</code> we’ll call <code>noise()</code>.
+      </p>
 
       <pre data-code-language="java" data-type="programlisting" class="codesplit">
      //{.bold} A Perlin noise brightness!
@@ -1418,7 +1433,8 @@
         different variables for the noise arguments. For example, a variable
         called <code>xoff</code> can be incremented each time <code></code>x
         increases horizontally, and a <code>yoff</code> variable each time
-        <code>y</code> moves vertically through the nested loops.</p>
+        <code>y</code> moves vertically through the nested loops.
+      </p>
 
       <div data-type="example">
         <h5>Example I.7: 2D Perlin noise</h5>
@@ -1453,14 +1469,16 @@
 
         <p>Play with color, <code>noiseDetail()</code>, and the rate at which
           <code>xoff</code> and <code>yoff</code> are incremented to achieve
-          different visual effects.</p>
+          different visual effects.
+        </p>
       </div>
 
       <div data-type="exercise" id="intro_exercise9">
         <h5>Exercise I.9</h5>
 
         <p>Add a third argument to noise that increments once per cycle through
-          <code>draw()</code> to animate the two-dimensional noise.</p>
+          <code>draw()</code> to animate the two-dimensional noise.
+        </p>
       </div>
 
       <div data-type="exercise" id="intro_exercise10">
